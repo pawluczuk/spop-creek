@@ -56,7 +56,7 @@ emptySolveBoard (Creek (x, y) _) = [ ((a, b), False) | a <- [0..x], b <- [0..y]]
 solveBoard :: Creek -> SolvedBoard -> SolvedBoard
 solveBoard (Creek (0, _) _) _ = []
 solveBoard (Creek (_, 0) _) _ = []
-solveBoard (creek ( emptySolveBoard creek )) = []
+solveBoard (Creek ( emptySolveBoard creek )) = []
 
 -- convert solution board single row to list of Strings
 -- FIX (written badly)
@@ -74,7 +74,13 @@ mapSolveValue True = "x"
 mapSolveValue False = " "
 
 -- print solution on screen
-printBoard::SolvedBoard -> IO()
+printBoard :: SolvedBoard -> IO()
 printBoard [] = putStrLn "Couldn't find solution."
 printBoard board = putStrLn (boardToString board 0)
+
+-- get possible variations for 
+possibleVariations :: CoordValue -> [CoordColoured]
+possibleVariations ( (x, y) , 0 ) = 
+	[ ( (x-1,y-1), False), ((x, y-1), False), ((x-1,y), False), ((x,y), False)]
+--possibleVariations ( (x, y), k ) 
 
